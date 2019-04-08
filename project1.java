@@ -72,69 +72,47 @@ class project1{
       quickSort(arr, 0, N - 1); 
    }
 
+   public static void swap(int[] arr, int i, int j){
+      int buf = arr[i];
+      arr[i] = arr[j];
+      arr[j] = buf; 
+   }
+
    private static void setPivotToEnd(int[] arr, int first, int last){
-      int min, max, median, buf;
+      int min, max, median;
       median = (first + last)/2;
       if (arr[first] > arr[median]){
-         buf = arr[first];
-         arr[first] = arr[median];
-         arr[median] = buf;
-      }
+         swap(arr,first, median);      }
 
       if (arr[first] > arr[last]){
-         buf = arr[first];
-         arr[first] = arr[last];
-         arr[last] = buf;
-      }
+         swap(arr,first, last);      }
 
       if (arr[median] < arr[last]){
-         buf = arr[median];
-         arr[median] = arr[last];
-         arr[last] = buf;
-      }
+         swap(arr,median, last);      }
 
    }
 
    private static int splitList(int[] arr, int left, int right){
       int low_index = left;
       int pivot_value = arr[right];
-      int buf;
-
-      for (int i = left; i <= right; i++){
+      for (int i = left; i < right; i++){
          if (arr[i] < pivot_value){
-            //System.out.printf("swap %d %d\n", arr[low_index], arr[i]);
-            buf = arr[low_index];
-            arr[low_index] = arr[i];
-            arr[i] = buf;
+            swap(arr,low_index, i);
             low_index += 1;
          }
       }
 
+      swap(arr,low_index, right);
+      /*
       buf = arr[low_index];
       arr[low_index] = arr[right];
       arr[right] = buf;
-
-      
-      /*for (int j = 0; j < 19; j++){
-         System.out.printf("%d, ", arr[j]);
-      }
-      System.out.printf("\n");
-      System.out.println(left);
-      System.out.println(right);
-      System.out.println(arr[low_index]);
-
-      try{
-         System.in.read();
-      }
-      catch(Exception e){
-         
-      }*/
+      */
 
       return low_index;
    }
 
    private static void quickSort(int[] arr, int first, int last){
-      //System.out.printf("%d %d\n", first, last);
       if (first < last){
          setPivotToEnd(arr, first, last);
          int pivotIndex = splitList(arr, first, last);
@@ -150,10 +128,8 @@ class project1{
    public static void time_sort(my_sort_interface sort_func, int N, Random rd){
       int[] arr = new int[N];
       for (int i = 0; i < arr.length; i++){
-         arr[i] = rd.nextInt() % 100;
-         //System.out.printf("%d, ", arr[i]);
+         arr[i] = rd.nextInt() % 10000;
       }
-      //System.out.printf("   -  original list\n");
 
       long stime = System.nanoTime();
       sort_func.sort(arr, N);
@@ -161,7 +137,7 @@ class project1{
       
       int last = arr[0];
       for (int i = 1; i < arr.length; i++){
-         assert arr[i] >= last;
+         assert (arr[i] >= last);
          last = arr[i];
       }
 
