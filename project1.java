@@ -1,4 +1,6 @@
-class lab0{   
+import java.util.Random;
+
+class project1{   
    public static void selectionSort(int[] arr, int N){
       for (int i = 0; i < N; i++){
          int min = arr[i];
@@ -17,7 +19,8 @@ class lab0{
       mergeSort(arr, 0, N - 1);
    }
    private static void mergeSortedHalves(int[] arr, int first, int middle, int last){
-      int temp[last - first + 1];
+      
+      int temp[] = new int[last - first + 1];
       int index1 = first;
       int index2 = middle + 1;
       int index = 0;
@@ -69,11 +72,120 @@ class lab0{
       quickSort(arr, 0, N - 1); 
    }
 
+   private static void setPivotToEnd(int[] arr, int first, int last){
+      int min, max, median, buf;
+      median = (first + last)/2;
+      if (arr[first] > arr[median]){
+         buf = arr[first];
+         arr[first] = arr[median];
+         arr[median] = buf;
+      }
+
+      if (arr[first] > arr[last]){
+         buf = arr[first];
+         arr[first] = arr[last];
+         arr[last] = buf;
+      }
+
+      if (arr[median] < arr[last]){
+         buf = arr[median];
+         arr[median] = arr[last];
+         arr[last] = buf;
+      }
+
+   }
+
+   private static int splitList(int[] arr, int left, int right){
+      int pivot = right;
+      int pivot_value = arr[right];
+      for (int i = 0; i <= right; i++){
+
+         
+         for (int j = 0; j <= right; j++){
+            System.out.printf("%d, ", arr[j]);
+         }
+         System.out.printf("\n");
+         System.out.println(left);
+         System.out.println(right);
+
+         try{
+            System.in.read();
+         }
+         catch(Exception e){
+            
+         }
+
+
+         if (i == pivot){
+            continue;
+         }
+         if (arr[i] < pivot_value && i > pivot){
+            arr[pivot] = arr[i];
+            pivot = i;
+         }
+         else if (arr[i] > pivot_value && i < pivot){
+            arr[pivot] = arr[i];
+            pivot = i;
+         }
+      }
+
+      arr[pivot] = pivot_value;
+
+      return pivot;
+   }
+
    private static void quickSort(int[] arr, int first, int last){
-      int pivot = (first - last)/2;
+      if (first < last){
+         setPivotToEnd(arr, first, last);
+         int pivotIndex = splitList(arr, first, last);
+         quickSort(arr, first, pivotIndex);
+         quickSort(arr, pivotIndex + 1, last);
+      }
+   }
+
+   public interface my_sort_interface{
+      public void sort(int[] arr, int N);
+   }
+
+   public static void time_sort(my_sort_interface sort_func, int N, Random rd){
+      int[] arr = new int[N];
+      for (int i = 0; i < arr.length; i++){
+         arr[i] = rd.nextInt() % 100;
+         System.out.printf("%d, ", arr[i]);
+      }
+      System.out.printf("   -  original list\n");
+
+      long stime = System.nanoTime();
+      sort_func.sort(arr, N);
+      long etime = System.nanoTime();
+      
+      int last = arr[0];
+      for (int i = 1; i < arr.length; i++){
+         assert arr[i] >= last;
+         last = arr[i];
+      }
+
+      System.out.printf("%d - ", N);
+      System.out.println((etime - stime) / 1000000);
+
    }
 
    public static void main(String []args){
+      Random rd = new Random();
+      my_sort_interface selectS = (arr, N) -> selectionSort(arr, N);
+      my_sort_interface mergeS = (arr, N) -> mergeSort(arr, N);
+      my_sort_interface quickS = (arr, N) -> quickSort(arr, N);
+
+      /*for (int N = 100; N < 200000; N*=2){
+         time_sort(selectS, N, rd);
+      }
+      for (int N = 100; N < 200000; N*=2){
+         time_sort(mergeS, N, rd);
+      }*/
+      for (int N = 10; N < 11; N*=2){
+         time_sort(quickS, N, rd);
+      }
+
 
    }
 
