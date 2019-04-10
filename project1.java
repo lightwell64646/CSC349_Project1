@@ -1,4 +1,5 @@
 import java.util.Random;
+import java.util.Arrays;
 
 class project1{   
    public static void selectionSort(int[] arr, int N){
@@ -57,14 +58,10 @@ class project1{
    }
    private static void mergeSort(int[] arr, int first, int last){
       if (first < last){
-         //normal
          int middle = (first + last) / 2;
          mergeSort(arr, first, middle);
          mergeSort(arr, middle + 1, last);
          mergeSortedHalves(arr, first, middle, last);
-      }
-      else{
-         //basecase
       }
    }
 
@@ -94,20 +91,24 @@ class project1{
 
    private static int splitList(int[] arr, int left, int right){
       int low_index = left;
+      int high_index = right - 1;
       int pivot_value = arr[right];
-      for (int i = left; i < right; i++){
-         if (arr[i] < pivot_value){
-            swap(arr,low_index, i);
+
+      while (low_index < high_index){
+         while (arr[low_index] < pivot_value){
+            low_index ++;
+         }
+         while (high_index > low_index && arr[high_index] >= pivot_value){
+            high_index --;
+         }
+         if (low_index < high_index){
+            swap(arr,low_index, high_index);
             low_index += 1;
+            high_index -= 1;
          }
       }
 
       swap(arr,low_index, right);
-      /*
-      buf = arr[low_index];
-      arr[low_index] = arr[right];
-      arr[right] = buf;
-      */
 
       return low_index;
    }
@@ -128,7 +129,7 @@ class project1{
    public static void time_sort(my_sort_interface sort_func, int N, Random rd){
       int[] arr = new int[N];
       for (int i = 0; i < arr.length; i++){
-         arr[i] = rd.nextInt() % 10000;
+         arr[i] = rd.nextInt();
       }
 
       long stime = System.nanoTime();
@@ -151,18 +152,28 @@ class project1{
       my_sort_interface selectS = (arr, N) -> selectionSort(arr, N);
       my_sort_interface mergeS = (arr, N) -> mergeSort(arr, N);
       my_sort_interface quickS = (arr, N) -> quickSort(arr, N);
+      my_sort_interface builtin = (arr, N) -> Arrays.sort(arr);
 
+
+      /*System.out.println("Selection Sort");
       for (int N = 100; N < 200000; N*=2){
          time_sort(selectS, N, rd);
-      }
-      for (int N = 100; N < 200000; N*=2){
+      }*/
+
+      System.out.println("Merge Sort");
+      for (int N = 100; N < 2000000; N*=2){
          time_sort(mergeS, N, rd);
       }
-      for (int N = 100; N < 200000; N*=2){
+
+      System.out.println("Quick Sort");
+      for (int N = 100; N < 2000000; N*=2){
          time_sort(quickS, N, rd);
       }
 
-
+      System.out.println("built in Sort");
+      for (int N = 100; N < 2000000; N*=2){
+         time_sort(builtin, N, rd);
+      }
    }
 
 }
