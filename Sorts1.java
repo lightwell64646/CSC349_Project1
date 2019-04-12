@@ -1,6 +1,6 @@
 class Sorts1{   
-   public static int selectionSort(int[] arr, int N){
-     int comparisons = 0;
+   public static long selectionSort(int[] arr, int N){
+     long comparisons = 0;
       for (int i = 0; i < N; i++){
          int min = arr[i];
          int min_index = i;
@@ -16,16 +16,16 @@ class Sorts1{
       }
       return comparisons;
    }
-   public static int mergeSort(int[] arr, int N){
+   public static long mergeSort(int[] arr, int N){
       return mergeSort(arr, 0, N - 1);
    }
-   private static int mergeSortedHalves(int[] arr, int first, int middle, int last){
+   private static long mergeSortedHalves(int[] arr, int first, int middle, int last){
       
       int temp[] = new int[last - first + 1];
       int index1 = first;
       int index2 = middle + 1;
       int index = 0;
-      int comparisons = 0;
+      long comparisons = 0;
 
       //pull smallest step
       while (index1 <= middle && index2 <= last){
@@ -57,10 +57,10 @@ class Sorts1{
       for (index = 0; index < last - first + 1; index++){
          arr[first + index] = temp[index];
       }
-      return comparisons
+      return comparisons;
    }
-   private static int mergeSort(int[] arr, int first, int last){
-      int comparisons = 0;
+   private static long mergeSort(int[] arr, int first, int last){
+      long comparisons = 0;
       if (first < last){
          int middle = (first + last) / 2;
          comparisons += mergeSort(arr, first, middle);
@@ -70,17 +70,20 @@ class Sorts1{
       return comparisons;
    }
 
-   public static int quickSort(int[] arr, int N){
-      return quickSort(arr, 0, N - 1); 
+   private static long qs_comparisons;
+   public static long quickSort(int[] arr, int N){
+      qs_comparisons = 0;
+      quickSort(arr, 0, N - 1);
+      return qs_comparisons;
    }
 
-   public static int swap(int[] arr, int i, int j){
+   private static void swap(int[] arr, int i, int j){
       int buf = arr[i];
       arr[i] = arr[j];
       arr[j] = buf; 
    }
 
-   private static int setPivotToEnd(int[] arr, int first, int last){
+   private static void setPivotToEnd(int[] arr, int first, int last){
       int min, max, median;
       median = (first + last)/2;
       if (arr[first] > arr[median]){
@@ -94,23 +97,23 @@ class Sorts1{
       if (arr[median] < arr[last]){
          swap(arr,median, last);
       }
-      return 3;
+      qs_comparisons += 3;
    }
 
-   private static int splitList(int[] arr, int left, int right, int *comparisons){
+   private static int splitList(int[] arr, int left, int right){
       int low_index = left;
       int high_index = right - 1;
       int pivot_value = arr[right];
 
       while (low_index <= high_index){
-         *comparisons += 1;
+         qs_comparisons += 1;
          while (arr[low_index] < pivot_value){
-            *comparisons += 1;
+            qs_comparisons += 1;
             low_index ++;
          }
-         *comparisons += 1;
+         qs_comparisons += 1;
          while (high_index >= low_index && arr[high_index] > pivot_value){
-            *comparisons += 1;
+            qs_comparisons += 1;
             high_index --;
          }
          if (low_index <= high_index){
@@ -125,15 +128,13 @@ class Sorts1{
       return low_index;
    }
 
-   private static int quickSort(int[] arr, int first, int last){
-      int comparisons = 0;
+   private static void quickSort(int[] arr, int first, int last){
       if (first < last){
-         comparisons += setPivotToEnd(arr, first, last);
-         int pivotIndex = splitList(arr, first, last, &comparisons);
-         comparisons += quickSort(arr, first, pivotIndex - 1);
-         comparisons += quickSort(arr, pivotIndex + 1, last);
+         setPivotToEnd(arr, first, last);
+         int pivotIndex = splitList(arr, first, last);
+         quickSort(arr, first, pivotIndex - 1);
+         quickSort(arr, pivotIndex + 1, last);
       }
-      return comparisons;
    }
 }
 

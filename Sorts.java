@@ -66,7 +66,7 @@ class Sorts{
       quickSort(arr, 0, N - 1); 
    }
 
-   public static void swap(int[] arr, int i, int j){
+   private static void swap(int[] arr, int i, int j){
       int buf = arr[i];
       arr[i] = arr[j];
       arr[j] = buf; 

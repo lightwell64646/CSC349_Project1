@@ -49,7 +49,7 @@ class SortTimes{
             ss_time = time_sort(selectS, arr1, N);
             ms_time = time_sort(mergeS, arr2, N);
             qs_time = time_sort(quickS, arr3, N);
-            System.out.printf("N = %d T_ss =  %d, T_ms = %d, T_qs = %d\n",  N, ss_time, ms_time, qs_time);
+            System.out.printf("N = %d: T_ss = %d, T_ms = %d, T_qs = %d\n",  N, ss_time, ms_time, qs_time);
          }
          System.out.printf("\n");
       }
