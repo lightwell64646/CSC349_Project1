@@ -1,3 +1,12 @@
+/*
+******HEADER****** 
+Authors: Nathan Pestes (npestes)
+         Kiana Dyson   (kdyson)
+Project #: 1
+Date: 4-12-2019
+Class: CSC349
+*/
+
 class Sorts1{   
    public static long selectionSort(int[] arr, int N){
      long comparisons = 0;

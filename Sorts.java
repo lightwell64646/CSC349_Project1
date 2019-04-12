@@ -1,3 +1,12 @@
+/*
+******HEADER****** 
+Authors: Nathan Pestes (npestes)
+         Kiana Dyson   (kdyson)
+Project #: 1
+Date: 4-12-2019
+Class: CSC349
+*/
+
 class Sorts{   
    public static void selectionSort(int[] arr, int N){
       for (int i = 0; i < N; i++){

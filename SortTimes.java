@@ -1,3 +1,13 @@
+/*
+******HEADER****** 
+Authors: Nathan Pestes (npestes)
+         Kiana Dyson   (kdyson)
+Project #: 1
+Date: 4-12-2019
+Class: CSC349
+*/
+
+
 import java.util.Random;
 import java.util.Arrays;
 
