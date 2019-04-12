@@ -1,0 +1,36 @@
+N = 5000: T_ss = 34, T_ms = 3, T_qs = 3
+N = 5000: T_ss = 10, T_ms = 0, T_qs = 0
+N = 5000: T_ss = 35, T_ms = 0, T_qs = 0
+N = 5000: T_ss = 8, T_ms = 0, T_qs = 0
+N = 5000: T_ss = 8, T_ms = 0, T_qs = 0
+
+N = 10000: T_ss = 34, T_ms = 1, T_qs = 1
+N = 10000: T_ss = 34, T_ms = 2, T_qs = 1
+N = 10000: T_ss = 34, T_ms = 2, T_qs = 1
+N = 10000: T_ss = 34, T_ms = 1, T_qs = 1
+N = 10000: T_ss = 34, T_ms = 2, T_qs = 1
+
+N = 20000: T_ss = 134, T_ms = 3, T_qs = 2
+N = 20000: T_ss = 134, T_ms = 4, T_qs = 2
+N = 20000: T_ss = 134, T_ms = 3, T_qs = 2
+N = 20000: T_ss = 142, T_ms = 5, T_qs = 2
+N = 20000: T_ss = 148, T_ms = 3, T_qs = 2
+
+N = 40000: T_ss = 597, T_ms = 10, T_qs = 5
+N = 40000: T_ss = 614, T_ms = 10, T_qs = 5
+N = 40000: T_ss = 545, T_ms = 12, T_qs = 4
+N = 40000: T_ss = 534, T_ms = 11, T_qs = 6
+N = 40000: T_ss = 709, T_ms = 9, T_qs = 5
+
+N = 80000: T_ss = 2220, T_ms = 21, T_qs = 11
+N = 80000: T_ss = 2258, T_ms = 17, T_qs = 10
+N = 80000: T_ss = 2259, T_ms = 21, T_qs = 11
+N = 80000: T_ss = 2677, T_ms = 18, T_qs = 10
+N = 80000: T_ss = 2269, T_ms = 17, T_qs = 10
+
+N = 160000: T_ss = 8983, T_ms = 51, T_qs = 29
+N = 160000: T_ss = 9053, T_ms = 44, T_qs = 24
+N = 160000: T_ss = 8576, T_ms = 40, T_qs = 24
+N = 160000: T_ss = 8709, T_ms = 41, T_qs = 21
+N = 160000: T_ss = 8601, T_ms = 40, T_qs = 21
+
